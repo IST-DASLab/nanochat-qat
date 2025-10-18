@@ -12,6 +12,7 @@ from nanochat.common import get_base_dir
 from nanochat.gpt import GPT, GPTConfig
 from nanochat.tokenizer import get_tokenizer
 from nanochat.common import setup_default_logging
+from nanochat.fpquant import add_qat
 
 # Set up logging
 setup_default_logging()
@@ -75,7 +76,8 @@ def build_model(checkpoint_dir, step, device, phase):
     # Load the model state
     model.to_empty(device=device)
     model.init_weights() # note: this is dumb, but we need to init the rotary embeddings. TODO: fix model re-init
-    model.load_state_dict(model_data, strict=True, assign=True)
+    model.load_state_dict(model_data, strict=False, assign=True)
+    model = add_qat(model, phase != "eval")
     # Put the model in the right training phase / mode
     if phase == "eval":
         model.eval()

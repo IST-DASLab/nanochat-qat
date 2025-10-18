@@ -35,7 +35,7 @@ class GPTConfig:
 
 def norm(x):
     # Purely functional rmsnorm with no learnable params
-    return F.rms_norm(x, (x.size(-1),))
+    return F.rms_norm(x, (x.size(-1),)).to(torch.bfloat16)
 
 
 def apply_rotary_emb(x, cos, sin):
@@ -121,7 +121,7 @@ class CausalSelfAttention(nn.Module):
             y = F.scaled_dot_product_attention(q, k, v, attn_mask=attn_mask)
 
         # Re-assemble the heads side by side and project back to residual stream
-        y = y.transpose(1, 2).contiguous().view(B, T, -1)
+        y = y.transpose(1, 2).contiguous().view(B, T, -1).to(torch.bfloat16)
         y = self.c_proj(y)
         return y
 
@@ -134,7 +134,7 @@ class MLP(nn.Module):
 
     def forward(self, x):
         x = self.c_fc(x)
-        x = F.relu(x).square()
+        x = F.relu(x).square().to(torch.bfloat16)
         x = self.c_proj(x)
         return x
 

@@ -16,6 +16,8 @@ dependencies = [
     "torch>=2.8.0",
     "uvicorn>=0.36.0",
     "wandb>=0.21.3",
+    "fp_quant>=0.2.0",
+    "qutlass>=0.1.0",
 ]
 
 [build-system]
@@ -27,6 +29,8 @@ build-backend = "maturin"
 torch = [
     { index = "pytorch-cu128" },
 ]
+qutlass = { path = "../qutlass-dev", editable = true }
+fp_quant = { path = "../FP-Quant/inference_lib", editable = true }
 
 [[tool.uv.index]]
 name = "pytorch-cu128"
