@@ -74,18 +74,18 @@ python -m scripts.tok_eval
 # which would decrease model performance. Possibly 2, 3 or so epochs is ~ok, but certainly not ideal and at 10+ epochs we'd
 # start to overfit hard.
 # 5) That's it, everything else (e.g. the learning rates) is adjusted automatically by the training script.
-torchrun --nproc_per_node=4 --rdzv_backend=static --rdzv_id=speedrun -m scripts.base_train -- --depth=32 --device_batch_size=32 --run=$WANDB_RUN
-torchrun --nproc_per_node=4 --rdzv_backend=static --rdzv_id=speedrun -m scripts.base_loss
-torchrun --nproc_per_node=4 --rdzv_backend=static --rdzv_id=speedrun -m scripts.base_eval
+torchrun --nproc_per_node=8 --rdzv_backend=static --rdzv_id=speedrun -m scripts.base_train -- --depth=32 --device_batch_size=32 --run=$WANDB_RUN
+torchrun --nproc_per_node=8 --rdzv_backend=static --rdzv_id=speedrun -m scripts.base_loss
+torchrun --nproc_per_node=8 --rdzv_backend=static --rdzv_id=speedrun -m scripts.base_eval
 
 # midtrain
 # NOTE: ensure that we use the same device_batch_size here as the base training script.
-torchrun --nproc_per_node=4 --rdzv_backend=static --rdzv_id=speedrun -m scripts.mid_train -- --device_batch_size=32 --run=$WANDB_RUN
-torchrun --nproc_per_node=4 --rdzv_backend=static --rdzv_id=speedrun -m scripts.chat_eval -- -i mid
+torchrun --nproc_per_node=8 --rdzv_backend=static --rdzv_id=speedrun -m scripts.mid_train -- --device_batch_size=32 --run=$WANDB_RUN
+torchrun --nproc_per_node=8 --rdzv_backend=static --rdzv_id=speedrun -m scripts.chat_eval -- -i mid
 
 # sft
-torchrun --nproc_per_node=4 --rdzv_backend=static --rdzv_id=speedrun -m scripts.chat_sft -- --run=$WANDB_RUN
-torchrun --nproc_per_node=4 --rdzv_backend=static --rdzv_id=speedrun -m scripts.chat_eval -- -i sft
+torchrun --nproc_per_node=8 --rdzv_backend=static --rdzv_id=speedrun -m scripts.chat_sft -- --run=$WANDB_RUN
+torchrun --nproc_per_node=8 --rdzv_backend=static --rdzv_id=speedrun -m scripts.chat_eval -- -i sft
 
 # generate final report
 python -m nanochat.report generate
