@@ -8,7 +8,7 @@ NANOCHAT_BASE_DIR="$HOME/.cache/nanochat"
 mkdir -p $NANOCHAT_BASE_DIR
 command -v uv &> /dev/null || curl -LsSf https://astral.sh/uv/install.sh | sh
 [ -d ".venv" ] || uv venv
-uv sync
+# uv sync
 source .venv/bin/activate
 if [ -z "$WANDB_RUN" ]; then
     WANDB_RUN=dummy
@@ -74,21 +74,21 @@ python -m scripts.tok_eval
 # which would decrease model performance. Possibly 2, 3 or so epochs is ~ok, but certainly not ideal and at 10+ epochs we'd
 # start to overfit hard.
 # 5) That's it, everything else (e.g. the learning rates) is adjusted automatically by the training script.
-torchrun --standalone --nproc_per_node=8 -m scripts.base_train -- --depth=32 --device_batch_size=8
-torchrun --standalone --nproc_per_node=8 -m scripts.base_loss
-torchrun --standalone --nproc_per_node=8 -m scripts.base_eval
+torchrun --nproc_per_node=4 --rdzv_backend=static --rdzv_id=speedrun -m scripts.base_train -- --depth=32 --device_batch_size=32 --run=$WANDB_RUN
+torchrun --nproc_per_node=4 --rdzv_backend=static --rdzv_id=speedrun -m scripts.base_loss
+torchrun --nproc_per_node=4 --rdzv_backend=static --rdzv_id=speedrun -m scripts.base_eval
 
 # midtrain
 # NOTE: ensure that we use the same device_batch_size here as the base training script.
-torchrun --standalone --nproc_per_node=8 -m scripts.mid_train -- --device_batch_size=8 --run=$WANDB_RUN
-torchrun --standalone --nproc_per_node=8 -m scripts.chat_eval -- -i mid
+torchrun --nproc_per_node=4 --rdzv_backend=static --rdzv_id=speedrun -m scripts.mid_train -- --device_batch_size=32 --run=$WANDB_RUN
+torchrun --nproc_per_node=4 --rdzv_backend=static --rdzv_id=speedrun -m scripts.chat_eval -- -i mid
 
 # sft
-torchrun --standalone --nproc_per_node=8 -m scripts.chat_sft -- --run=$WANDB_RUN
-torchrun --standalone --nproc_per_node=8 -m scripts.chat_eval -- -i sft
+torchrun --nproc_per_node=4 --rdzv_backend=static --rdzv_id=speedrun -m scripts.chat_sft -- --run=$WANDB_RUN
+torchrun --nproc_per_node=4 --rdzv_backend=static --rdzv_id=speedrun -m scripts.chat_eval -- -i sft
 
 # generate final report
 python -m nanochat.report generate
 
 # talk to it
-python -m scripts.chat_web
+# python -m scripts.chat_web
