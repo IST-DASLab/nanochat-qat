@@ -337,19 +337,12 @@ wheels = [
 [[package]]
 name = "fp-quant"
 version = "0.2.0"
-source = { editable = "../FP-Quant/inference_lib" }
+source = { git = "https://github.com/IST-DASLab/FP-Quant?subdirectory=inference_lib&branch=backwards#4192c8a8e184098ca732ea421e66c8bc3258466d" }
 dependencies = [
     { name = "scipy", version = "1.15.3", source = { registry = "https://pypi.org/simple" }, marker = "python_full_version < '3.11'" },
     { name = "scipy", version = "1.16.2", source = { registry = "https://pypi.org/simple" }, marker = "python_full_version >= '3.11'" },
     { name = "torch" },
     { name = "triton" },
-]
-
-[package.metadata]
-requires-dist = [
-    { name = "scipy", specifier = ">=1.13.0" },
-    { name = "torch", specifier = ">=2.7.0" },
-    { name = "triton", specifier = ">=3.3.0" },
 ]
 
 [[package]]
@@ -799,10 +792,10 @@ requires-dist = [
     { name = "datasets", specifier = ">=4.0.0" },
     { name = "fastapi", specifier = ">=0.117.1" },
     { name = "files-to-prompt", specifier = ">=0.6" },
-    { name = "fp-quant", editable = "../FP-Quant/inference_lib" },
+    { name = "fp-quant", git = "https://github.com/IST-DASLab/FP-Quant?subdirectory=inference_lib&branch=backwards" },
     { name = "numpy", specifier = "==1.26.4" },
     { name = "psutil", specifier = ">=7.1.0" },
-    { name = "qutlass", editable = "../qutlass-dev" },
+    { name = "qutlass", git = "https://github.com/IST-DASLab/qutlass-dev?branch=nanochat" },
     { name = "regex", specifier = ">=2025.9.1" },
     { name = "tiktoken", specifier = ">=0.11.0" },
     { name = "tokenizers", specifier = ">=0.22.0" },
@@ -1437,7 +1430,7 @@ wheels = [
 [[package]]
 name = "qutlass"
 version = "0.1.0"
-source = { editable = "../qutlass-dev" }
+source = { git = "https://github.com/IST-DASLab/qutlass-dev?branch=nanochat#1178c4703f96bd3bc8af20b94a23c5b446c20769" }
 
 [[package]]
 name = "regex"
