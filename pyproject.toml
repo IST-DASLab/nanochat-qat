@@ -16,8 +16,8 @@ dependencies = [
     "torch>=2.8.0",
     "uvicorn>=0.36.0",
     "wandb>=0.21.3",
-    "fp_quant>=0.2.0",
-    "qutlass>=0.1.0",
+    "fp_quant>=0.3.0",
+    "qutlass>=0.2.0",
 ]
 
 [build-system]
@@ -34,7 +34,7 @@ torch = [
     { index = "pytorch-cu128" },
 ]
 
-qutlass = { git = "https://github.com/IST-DASLab/qutlass-dev", branch = "nanochat" }
+qutlass = { git = "https://github.com/IST-DASLab/qutlass-dev", branch = "main" }
 fp_quant = { git = "https://github.com/IST-DASLab/FP-Quant", branch = "backwards", subdirectory = "inference_lib" }
 
 [[tool.uv.index]]
