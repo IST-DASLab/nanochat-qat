@@ -91,4 +91,4 @@ torchrun --nproc_per_node=8 --rdzv_backend=static --rdzv_id=speedrun -m scripts.
 python -m nanochat.report generate
 
 # talk to it
-# python -m scripts.chat_web
+python -m scripts.chat_web

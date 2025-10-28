@@ -92,25 +92,25 @@ echo "Waiting for dataset download to complete..."
 wait $DATASET_DOWNLOAD_PID
 
 # pretrain the d20 model
-torchrun --nproc_per_node=4 --rdzv_backend=static --rdzv_id=speedrun -m scripts.base_train -- --depth=20 --run=$WANDB_RUN
+torchrun --nproc_per_node=8 --rdzv_backend=static --rdzv_id=speedrun -m scripts.base_train -- --depth=20 --run=$WANDB_RUN 
 # evaluate the model on a larger chunk of train/val data and draw some samples
-torchrun --nproc_per_node=4 --rdzv_backend=static --rdzv_id=speedrun -m scripts.base_loss
+torchrun --nproc_per_node=8 --rdzv_backend=static --rdzv_id=speedrun -m scripts.base_loss
 # evaluate the model on CORE tasks
-torchrun --nproc_per_node=4 --rdzv_backend=static --rdzv_id=speedrun -m scripts.base_eval
+torchrun --nproc_per_node=8 --rdzv_backend=static --rdzv_id=speedrun -m scripts.base_eval
 
 # -----------------------------------------------------------------------------
 # Midtraining (teach the model conversation special tokens, tool use, multiple choice)
 
 # run midtraining and eval the model
-torchrun --nproc_per_node=4 --rdzv_backend=static --rdzv_id=speedrun -m scripts.mid_train -- --run=$WANDB_RUN
-torchrun --nproc_per_node=4 --rdzv_backend=static --rdzv_id=speedrun -m scripts.chat_eval -- -i mid
+torchrun --nproc_per_node=8 --rdzv_backend=static --rdzv_id=speedrun -m scripts.mid_train -- --run=$WANDB_RUN
+torchrun --nproc_per_node=8 --rdzv_backend=static --rdzv_id=speedrun -m scripts.chat_eval -- -i mid
 
 # -----------------------------------------------------------------------------
 # Supervised Finetuning (domain adaptation to each sequence all by itself per row)
 
 # train sft and re-eval right away (should see a small bump)
-torchrun --nproc_per_node=4 --rdzv_backend=static --rdzv_id=speedrun -m scripts.chat_sft -- --run=$WANDB_RUN
-torchrun --nproc_per_node=4 --rdzv_backend=static --rdzv_id=speedrun -m scripts.chat_eval -- -i sft
+torchrun --nproc_per_node=8 --rdzv_backend=static --rdzv_id=speedrun -m scripts.chat_sft -- --run=$WANDB_RUN
+torchrun --nproc_per_node=8 --rdzv_backend=static --rdzv_id=speedrun -m scripts.chat_eval -- -i sft
 
 # chat with the model over CLI! Leave out the -p to chat interactively
 # python -m scripts.chat_cli -p "Why is the sky blue?"
@@ -123,9 +123,9 @@ torchrun --nproc_per_node=4 --rdzv_backend=static --rdzv_id=speedrun -m scripts.
 # (optional)
 
 # run reinforcement learning
-# torchrun --nproc_per_node=4 --rdzv_backend=static --rdzv_id=speedrun -m scripts.chat_rl -- --run=$WANDB_RUN
+# torchrun --nproc_per_node=8 --rdzv_backend=static --rdzv_id=speedrun -m scripts.chat_rl -- --run=$WANDB_RUN
 # eval the RL model only on GSM8K
-# torchrun --nproc_per_node=4 --rdzv_backend=static --rdzv_id=speedrun -m scripts.chat_eval -- -i rl -a GSM8K
+# torchrun --nproc_per_node=8 --rdzv_backend=static --rdzv_id=speedrun -m scripts.chat_eval -- -i rl -a GSM8K
 
 # -----------------------------------------------------------------------------
 # Generate the full report by putting together all the sections
