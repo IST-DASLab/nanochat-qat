@@ -336,7 +336,7 @@ wheels = [
 
 [[package]]
 name = "fp-quant"
-version = "0.3.1"
+version = "0.3.2"
 source = { registry = "https://pypi.org/simple" }
 dependencies = [
     { name = "scipy", version = "1.15.3", source = { registry = "https://pypi.org/simple" }, marker = "python_full_version < '3.11'" },
@@ -344,9 +344,9 @@ dependencies = [
     { name = "torch" },
     { name = "triton" },
 ]
-sdist = { url = "https://files.pythonhosted.org/packages/f6/31/2d860fcd18a2e5bfa20612586b8535885e0cfa1bf77ac63822cdf742bfdd/fp_quant-0.3.1.tar.gz", hash = "sha256:4f4d2369661d4420d2b9500fda095cc14d89fc84fc78a932d5efc400b9b68528", size = 11104, upload-time = "2025-10-28T13:07:53.991Z" }
+sdist = { url = "https://files.pythonhosted.org/packages/26/fa/79842f3a65df80970ec33c6c9cdaa610e2521e47e82e0a64bd213a543528/fp_quant-0.3.2.tar.gz", hash = "sha256:a8ac368aab3ad924ffe975ad9119e859e97c10c25fdd8e6d5c6be64c7c60921e", size = 11043, upload-time = "2025-10-28T13:37:11.494Z" }
 wheels = [
-    { url = "https://files.pythonhosted.org/packages/ce/87/1671e4bb9a29c3ff9126075e732625035496104410f55bd727b80676abd7/fp_quant-0.3.1-py3-none-any.whl", hash = "sha256:77a78fab3843a42deb6a1c729b6c29a5e809b57eb48362c727635ce6cdbbc671", size = 14550, upload-time = "2025-10-28T13:07:52.136Z" },
+    { url = "https://files.pythonhosted.org/packages/82/f9/07b1a420132bcaefffbecd911db832bbcb8c95e213c6dc77372270f0ba5b/fp_quant-0.3.2-py3-none-any.whl", hash = "sha256:a2bb659a85c8e97db7e3b7bd606102199f9460705c8cb9eeb834d5b153b549e1", size = 14519, upload-time = "2025-10-28T13:37:10.333Z" },
 ]
 
 [[package]]
@@ -796,7 +796,7 @@ requires-dist = [
     { name = "datasets", specifier = ">=4.0.0" },
     { name = "fastapi", specifier = ">=0.117.1" },
     { name = "files-to-prompt", specifier = ">=0.6" },
-    { name = "fp-quant", specifier = ">=0.3.1" },
+    { name = "fp-quant", specifier = ">=0.3.2" },
     { name = "numpy", specifier = "==1.26.4" },
     { name = "psutil", specifier = ">=7.1.0" },
     { name = "qutlass", git = "https://github.com/IST-DASLab/qutlass?tag=v0.2.0" },
