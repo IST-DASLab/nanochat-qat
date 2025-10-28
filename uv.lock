@@ -336,13 +336,17 @@ wheels = [
 
 [[package]]
 name = "fp-quant"
-version = "0.2.0"
-source = { git = "https://github.com/IST-DASLab/FP-Quant?subdirectory=inference_lib&branch=backwards#4192c8a8e184098ca732ea421e66c8bc3258466d" }
+version = "0.3.1"
+source = { registry = "https://pypi.org/simple" }
 dependencies = [
     { name = "scipy", version = "1.15.3", source = { registry = "https://pypi.org/simple" }, marker = "python_full_version < '3.11'" },
     { name = "scipy", version = "1.16.2", source = { registry = "https://pypi.org/simple" }, marker = "python_full_version >= '3.11'" },
     { name = "torch" },
     { name = "triton" },
+]
+sdist = { url = "https://files.pythonhosted.org/packages/f6/31/2d860fcd18a2e5bfa20612586b8535885e0cfa1bf77ac63822cdf742bfdd/fp_quant-0.3.1.tar.gz", hash = "sha256:4f4d2369661d4420d2b9500fda095cc14d89fc84fc78a932d5efc400b9b68528", size = 11104, upload-time = "2025-10-28T13:07:53.991Z" }
+wheels = [
+    { url = "https://files.pythonhosted.org/packages/ce/87/1671e4bb9a29c3ff9126075e732625035496104410f55bd727b80676abd7/fp_quant-0.3.1-py3-none-any.whl", hash = "sha256:77a78fab3843a42deb6a1c729b6c29a5e809b57eb48362c727635ce6cdbbc671", size = 14550, upload-time = "2025-10-28T13:07:52.136Z" },
 ]
 
 [[package]]
@@ -792,10 +796,10 @@ requires-dist = [
     { name = "datasets", specifier = ">=4.0.0" },
     { name = "fastapi", specifier = ">=0.117.1" },
     { name = "files-to-prompt", specifier = ">=0.6" },
-    { name = "fp-quant", git = "https://github.com/IST-DASLab/FP-Quant?subdirectory=inference_lib&branch=backwards" },
+    { name = "fp-quant", specifier = ">=0.3.1" },
     { name = "numpy", specifier = "==1.26.4" },
     { name = "psutil", specifier = ">=7.1.0" },
-    { name = "qutlass", git = "https://github.com/IST-DASLab/qutlass-dev?branch=nanochat" },
+    { name = "qutlass", git = "https://github.com/IST-DASLab/qutlass?tag=v0.2.0" },
     { name = "regex", specifier = ">=2025.9.1" },
     { name = "tiktoken", specifier = ">=0.11.0" },
     { name = "tokenizers", specifier = ">=0.22.0" },
@@ -1429,8 +1433,8 @@ wheels = [
 
 [[package]]
 name = "qutlass"
-version = "0.1.0"
-source = { git = "https://github.com/IST-DASLab/qutlass-dev?branch=nanochat#1178c4703f96bd3bc8af20b94a23c5b446c20769" }
+version = "0.2.0"
+source = { git = "https://github.com/IST-DASLab/qutlass?tag=v0.2.0#83cc4fda4a6238a97e51afd648d13e25450bf74e" }
 
 [[package]]
 name = "regex"

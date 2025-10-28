@@ -16,7 +16,7 @@ dependencies = [
     "torch>=2.8.0",
     "uvicorn>=0.36.0",
     "wandb>=0.21.3",
-    "fp_quant>=0.3.0",
+    "fp_quant>=0.3.1",
     "qutlass>=0.2.0",
 ]
 
@@ -34,8 +34,7 @@ torch = [
     { index = "pytorch-cu128" },
 ]
 
-qutlass = { git = "https://github.com/IST-DASLab/qutlass-dev", branch = "main" }
-fp_quant = { git = "https://github.com/IST-DASLab/FP-Quant", branch = "backwards", subdirectory = "inference_lib" }
+qutlass = { git = "https://github.com/IST-DASLab/qutlass", tag = "v0.2.0" }
 
 [[tool.uv.index]]
 name = "pytorch-cu128"
