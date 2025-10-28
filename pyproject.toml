@@ -16,7 +16,7 @@ dependencies = [
     "torch>=2.8.0",
     "uvicorn>=0.36.0",
     "wandb>=0.21.3",
-    "fp_quant>=0.3.1",
+    "fp_quant>=0.3.2",
     "qutlass>=0.2.0",
 ]
 
