@@ -1,11 +1,3 @@
-#!/usr/bin/env -S uv run --script
-# /// script
-# requires-python = ">=3.10"
-# dependencies = ["transformers"]
-# [tool.uv.sources]
-# transformers = { git = "https://github.com/BlackSamorez/transformers", branch = "fpquant_backwards" }
-# ///
-
 import os
 import time
 from typing import Any
